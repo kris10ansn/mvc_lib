@@ -3,6 +3,10 @@ html, body {
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 form {
   input.invalid {
     color: red;
@@ -13,3 +17,4 @@ form {
     color: red;
   }
 }
+

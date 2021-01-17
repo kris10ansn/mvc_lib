@@ -30,7 +30,7 @@ abstract class DBModel extends Model
             $statement->execute();
             return true;
         } catch (Exception $error) {
-            echo "ERROR" . PHP_EOL . $error;
+            echo "ERROR<br>" . $error;
             return false;
         }
     }

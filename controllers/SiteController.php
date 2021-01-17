@@ -17,15 +17,11 @@ class SiteController extends Controller
         return $this->render("home", $params);
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
+        if ($request->getMethod() === "post") {
+            return "handling request...";
+        }
         return $this->render("contact");
-    }
-
-    public function handleContact(Request $request)
-    {
-        $body = $request->getBody();
-
-        return "Handling..";
     }
 }

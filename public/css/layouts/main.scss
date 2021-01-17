@@ -1,0 +1,19 @@
+div.flash {
+  @keyframes popup {
+    from {
+      max-height: 0px;
+    }
+    to {
+      max-height: 70px;
+    }
+  }
+
+  width: 100%;
+  padding: 3px 16px;
+  animation: popup 1s ease;
+  overflow: hidden;
+
+  &.success {
+    background: lightgreen;
+  }
+}

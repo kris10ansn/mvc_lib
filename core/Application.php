@@ -9,6 +9,7 @@ class Application
     public Request $request;
     public Response $response;
     public Controller $controller;
+    public Session $session;
     public Database $db;
     public static Application $app;
 
@@ -17,12 +18,14 @@ class Application
         self::$ROOT_DIR = $root;
         self::$app = $this;
 
+        $this->db = new Database($config["db"]);
+        $this->session = new Session();
+
         $this->request = new Request();
         $this->response = new Response();
 
         $this->router = new Router($this->request, $this->response);
 
-        $this->db = new Database($config["db"]);
     }
 
     public function run()
