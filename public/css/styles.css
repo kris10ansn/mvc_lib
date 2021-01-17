@@ -1,0 +1,14 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+form input.invalid {
+  color: red;
+  border: 2px solid red;
+}
+form p.error {
+  color: red;
+}
+
+/*# sourceMappingURL=styles.css.map */
