@@ -36,8 +36,13 @@ class Form
         echo '</form>';
     }
 
-    public function field($attribute): InputField
+    public function inputField($attribute): InputField
     {
         return new InputField($this->model, $attribute);
+    }
+
+    public function textAreaField($attribute): TextAreaField
+    {
+        return new TextAreaField($this->model, $attribute);
     }
 }
