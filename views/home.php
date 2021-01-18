@@ -1,4 +1,9 @@
+<?php
+/** @var View $this */
 
-<?php use \app\core\Application; ?>
+use app\core\View;
+
+$this->title = "Home";
+?>
 
 <h1>Home</h1>

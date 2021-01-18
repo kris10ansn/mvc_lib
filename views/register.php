@@ -1,10 +1,13 @@
 
-<?php /** @var User $model */ ?>
-
 <?php
+/** @var User $model */
+/** @var View $this */
+
 use app\core\form\Form;
 use app\models\User;
+use app\core\View;
 
+$this->title = "Home";
 $form = new Form("", "post", $model);
 ?>
 
