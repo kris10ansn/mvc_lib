@@ -7,29 +7,46 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
+use app\core\Response;
+use app\models\LoginForm;
 use app\models\User;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request, Response $response)
     {
+        $loginForm = new LoginForm();
+
         if ($request->getMethod() === "post") {
-            return "Handle post";
+            $loginForm->loadData($request->getBody());
+
+            if ($loginForm->validate() && $loginForm->login()) {
+                $username = Application::$app->user->getDisplayName();
+                Application::$app->session->setFlash("success", "Welcome back, $username!");
+                $response->redirect("/");
+            }
         }
 
-        return $this->render("login");
+        return $this->render("login", [
+            "model" => $loginForm
+        ]);
     }
 
-    public function register(Request $request)
+    public function logout(Request $request, Response $response)
+    {
+        Application::$app->logout();
+        $response->redirect("/");
+    }
+
+    public function register(Request $request, Response $response)
     {
         $user = new User();
 
         if ($request->getMethod() === "post") {
             $user->loadData($request->getBody());
-
             if ($user->validate() && $user->register()) {
-                Application::$app->session->setFlash("success", "Registered account!");
-                Application::$app->response->redirect("/");
+                Application::$app->session->setFlash("success", "Account registered!");
+                $response->redirect("/");
             }
         }
 
@@ -40,7 +57,7 @@ class AuthController extends Controller
 
     public function render($view, $params = [])
     {
-        $this->setLayout("auth");
+        $this->setLayout("main");
         return parent::render($view, $params);
     }
 }

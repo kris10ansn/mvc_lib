@@ -1,6 +1,33 @@
+nav {
+  position: sticky;
+  display: flex;
+  width: 100%;
+  background: #ddd;
+  padding: 0 10px;
+}
+nav div.left,
+nav div.right {
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+}
+nav div.left.right,
+nav div.right.right {
+  justify-content: flex-start;
+}
+nav div.left.left,
+nav div.right.left {
+  justify-content: flex-end;
+}
+nav div.left > *,
+nav div.right > * {
+  margin: 0;
+  padding: 20px;
+}
+
 div.flash {
   width: 100%;
-  padding: 3px 16px;
+  padding: 10px;
   animation: popup 1s ease;
   overflow: hidden;
 }
@@ -12,8 +39,16 @@ div.flash {
     max-height: 70px;
   }
 }
+div.flash p {
+  margin: 0;
+  padding: 0;
+}
 div.flash.success {
   background: lightgreen;
+}
+
+div#content {
+  margin: 10px;
 }
 
 /*# sourceMappingURL=main.css.map */

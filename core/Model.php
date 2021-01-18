@@ -4,6 +4,8 @@
 namespace app\core;
 
 
+use ReflectionClass;
+
 abstract class Model
 {
     public const RULE_REQUIRED = "required";
@@ -28,6 +30,11 @@ abstract class Model
     public function labels(): array
     {
         return [];
+    }
+
+    public function getLabel(string $attribute): string
+    {
+        return $this->labels()[$attribute] ?? $attribute;
     }
 
     public function validate(): bool
@@ -71,7 +78,7 @@ abstract class Model
                     if($result["users"] > 0) {
                         $this->addError($attribute, self::RULE_UNIQUE, [
                             "field" => $attribute,
-                            "className" => (new \ReflectionClass($this))->getShortName()
+                            "className" => (new ReflectionClass($this))->getShortName()
                         ]);
                     }
                 }
@@ -81,7 +88,7 @@ abstract class Model
         return empty($this->errors);
     }
 
-    public function addError(string $attribute, string $rule, $params = [])
+    private function addError(string $attribute, string $rule, $params = [])
     {
         $message = $this->errorMessages()[$rule] ?? "";
 
@@ -90,6 +97,11 @@ abstract class Model
         }
 
         $this->errors[$attribute][$rule] = $message;
+    }
+
+    public function addErrorMessage(string $attribute, string $message)
+    {
+        $this->errors[$attribute][] = $message;
     }
 
     public function errorMessages(): array

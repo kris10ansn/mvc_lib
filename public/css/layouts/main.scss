@@ -1,3 +1,36 @@
+$margin: 10px;
+
+nav {
+  position: sticky;
+  display: flex;
+  width: 100%;
+  background: #ddd;
+
+  padding: 0 $margin;
+
+  div.left,
+  div.right {
+    flex-basis: 0;
+    flex-grow: 1;
+    display: flex;
+
+    &.right {
+      justify-content: flex-start;
+    }
+
+    &.left {
+      justify-content: flex-end;
+    }
+
+    $padding: 20px;
+    & > * {
+      margin: 0;
+      padding: $padding;
+    }
+
+  }
+}
+
 div.flash {
   @keyframes popup {
     from {
@@ -9,11 +42,20 @@ div.flash {
   }
 
   width: 100%;
-  padding: 3px 16px;
+  padding: 10px;
   animation: popup 1s ease;
   overflow: hidden;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
 
   &.success {
     background: lightgreen;
   }
+}
+
+div#content {
+  margin: $margin;
 }

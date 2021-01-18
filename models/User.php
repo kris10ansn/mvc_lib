@@ -4,9 +4,11 @@
 namespace app\models;
 
 
+use app\core\Application;
 use app\core\DBModel;
+use app\core\UserModel;
 
-class User extends DBModel
+class User extends UserModel
 {
     public const STATUS_INACTIVE = 0;
     public const STATUS_ACTIVE = 1;
@@ -16,11 +18,14 @@ class User extends DBModel
     public string $username = "";
     public string $password = "";
     public int $status = self::STATUS_INACTIVE;
+    public int $id;
 
-    public function save(): bool
+    public function save()
     {
         $this->password = (string) password_hash($this->password, PASSWORD_DEFAULT);
-        return parent::save();
+        $this->id = parent::save();
+        Application::$app->session->set("user", $this->id);
+        return $this->id;
     }
 
     public function register(): bool
@@ -42,6 +47,11 @@ class User extends DBModel
         return "user";
     }
 
+    public function primaryKey(): string {
+        return "id";
+    }
+
+
     public function attributes(): array
     {
         return ["username", "email", "password", "status"];
@@ -54,5 +64,10 @@ class User extends DBModel
             "username" => "Username",
             "password" => "Password"
         ];
+    }
+
+    public function getDisplayName(): string
+    {
+        return $this->username;
     }
 }

@@ -35,7 +35,7 @@ class Form
         echo '</form>';
     }
 
-    public function field($attribute)
+    public function field($attribute): Field
     {
         return new Field($this->model, $attribute);
     }

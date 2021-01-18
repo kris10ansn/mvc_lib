@@ -7,6 +7,10 @@ html, body {
   box-sizing: border-box;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 form {
   input.invalid {
     color: red;

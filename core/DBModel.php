@@ -9,8 +9,27 @@ abstract class DBModel extends Model
 {
     public abstract function tableName(): string;
     public abstract function attributes(): array;
+    public abstract function primaryKey(): string;
 
-    public function save(): bool
+    public function findOne(array $where)
+    {
+        $tableName = static::tableName();
+        $attributes = array_keys($where);
+
+        $selectors = implode("AND ", array_map(fn($attr) => "$attr = :$attr", $attributes));
+        $sql = "SELECT * FROM $tableName WHERE $selectors";
+
+        $statement = Application::$app->db->pdo->prepare($sql);
+
+        foreach ($where as $key => $value) {
+            $statement->bindValue(":$key", $value);
+        }
+
+        $statement->execute();
+        return $statement->fetchObject(static::class);
+    }
+
+    public function save()
     {
         try {
             $pdo = Application::$app->db->pdo;
@@ -28,7 +47,7 @@ abstract class DBModel extends Model
             }
 
             $statement->execute();
-            return true;
+            return $pdo->lastInsertId();
         } catch (Exception $error) {
             echo "ERROR<br>" . $error;
             return false;

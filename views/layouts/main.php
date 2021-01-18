@@ -15,18 +15,22 @@ use app\core\Application;
 
 <body>
     <nav>
-        <ul>
-            <a href="/register">Register</a>
-        </ul>
-        <ul>
-            <a href="/login">Log in</a>
-        </ul>
-        <ul>
+        <div class="right">
             <a href="/">Home</a>
-        </ul>
-        <ul>
             <a href="/contact">Contact</a>
-        </ul>
+        </div>
+
+        <div class="left">
+            <?php if (!Application::$app->user): ?>
+                <a href="/register">Register</a>
+                <a href="/login">Log in</a>
+            <?php else: ?>
+                <p>👨‍💻 <?php echo Application::$app->user->getDisplayName() ?></p>
+                <form action="/logout" method="post">
+                    <button type="submit">Log out</button>
+                </form>
+            <?php endif; ?>
+        </div>
     </nav>
 
     <?php
@@ -39,8 +43,9 @@ use app\core\Application;
         </div>
     <?php endif; ?>
 
-    {{content}}
-
+    <div id="content">
+        {{content}}
+    </div>
 </body>
 
 </html>

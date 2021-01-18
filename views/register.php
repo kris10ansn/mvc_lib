@@ -1,9 +1,9 @@
 
-<?php /** @var Model $model */ ?>
+<?php /** @var User $model */ ?>
 
 <?php
 use app\core\form\Form;
-use app\core\Model;
+use app\models\User;
 
 $form = new Form("", "post", $model);
 ?>

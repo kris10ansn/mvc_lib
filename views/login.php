@@ -1,14 +1,20 @@
+
+<?php /** @var LoginForm $model */ ?>
+
+<?php
+use app\core\form\Form;
+use app\models\LoginForm;
+
+$form = new Form("", "post", $model);
+?>
+
+
 <h1>Log in</h1>
 
-<form action="" method="post">
-    <label>
-        Username
-        <input type="text" name="username" placeholder="Username">
-    </label>
-    <label>
-        Password
-        <input type="password" name="password" placeholder="Password">
-    </label>
-
-    <button type="submit">Submit</button>
-</form>
+<?php
+$form->begin();
+?>
+<?php echo $form->field("email"); ?>
+<?php echo $form->field("password")->password(); ?>
+<button type="submit">Log in</button>
+<?php $form->end(); ?>

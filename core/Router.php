@@ -51,7 +51,7 @@ class Router
             Application::$app->controller = $callback[0];
         }
 
-        return call_user_func($callback, $this->request);
+        return call_user_func($callback, $this->request, $this->response);
     }
 
     public function renderView($view, $params = [])
@@ -64,7 +64,7 @@ class Router
 
     protected function layoutContent()
     {
-        $layout = Application::$app->controller->layout;
+        $layout = Application::$app->controller->layout ?? "main";
         ob_start();
         require_once(Application::$ROOT_DIR . "/views/layouts/$layout.php");
         return ob_get_clean();

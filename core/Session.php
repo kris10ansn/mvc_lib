@@ -41,4 +41,19 @@ class Session
             }
         }
     }
+
+    public function set(string $key, $value)
+    {
+        $_SESSION[$key] = $value;
+    }
+
+    public function get(string $key)
+    {
+        return $_SESSION[$key] ?? null;
+    }
+
+    public function remove($key)
+    {
+        unset($_SESSION[$key]);
+    }
 }
