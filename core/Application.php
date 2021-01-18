@@ -7,10 +7,11 @@ use app\models\User;
 class Application
 {
     public static string $ROOT_DIR;
+    public string $layout = "main";
     public Router $router;
     public Request $request;
     public Response $response;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public Session $session;
     public Database $db;
     public ?UserModel $user;
@@ -43,7 +44,13 @@ class Application
 
     public function run()
     {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            echo $this->router->renderView("_error", [
+                "exception" => $e
+            ]);
+        }
     }
 
     public function login(UserModel $user): bool

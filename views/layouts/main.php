@@ -25,7 +25,8 @@ use app\core\Application;
                 <a href="/register">Register</a>
                 <a href="/login">Log in</a>
             <?php else: ?>
-                <p>👨‍💻 <?php echo Application::$app->user->getDisplayName() ?></p>
+                <p>👨‍💻 <a href="/profile"><?php echo Application::$app->user->getDisplayName() ?></a></p>
+
                 <form action="/logout" method="post">
                     <button type="submit">Log out</button>
                 </form>
