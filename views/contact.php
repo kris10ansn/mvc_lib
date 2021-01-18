@@ -16,8 +16,8 @@ $form = new Form("", "post", $model);
 <?php
 $form->begin();
 ?>
-<?php echo $form->field("subject"); ?>
-<?php echo $form->field("email") ?>
-<?php echo $form->field("body") ?>
+<?php echo $form->inputField("subject"); ?>
+<?php echo $form->inputField("email") ?>
+<?php echo $form->textAreaField("body") ?>
     <button type="submit">Submit</button>
 <?php $form->end(); ?>

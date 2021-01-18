@@ -17,7 +17,7 @@ $form = new Form("", "post", $model);
 <?php
 $form->begin();
 ?>
-<?php echo $form->field("email"); ?>
-<?php echo $form->field("password")->password(); ?>
+<?php echo $form->inputField("email"); ?>
+<?php echo $form->inputField("password")->password(); ?>
 <button type="submit">Log in</button>
 <?php $form->end(); ?>
