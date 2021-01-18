@@ -16,6 +16,7 @@ class Form
      * Form constructor.
      * @param string $action
      * @param string $method
+     * @param Model $model
      */
     public function __construct(string $action, string $method, Model $model)
     {
@@ -35,8 +36,8 @@ class Form
         echo '</form>';
     }
 
-    public function field($attribute): Field
+    public function field($attribute): InputField
     {
-        return new Field($this->model, $attribute);
+        return new InputField($this->model, $attribute);
     }
 }
