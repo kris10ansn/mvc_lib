@@ -29,6 +29,7 @@ abstract class Field
         return sprintf('
             <label>
                 %s
+                <br>
                 %s
                 <p class="error">%s</p>
             </label>
